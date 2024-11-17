@@ -11,8 +11,8 @@ Dynamic Adaptive Hardware-Aware DNN Model Compression Framework for AI Inference
 ## Setup
 1. Clone the repository
 \`\`\`bash
-git clone https://github.com/YOUR_USERNAME/model-compression-edge.git
-cd model-compression-edge
+git clone https://github.com/PerfectObumneme/Edge-Model-Compression.git
+cd Edge-Model-Compression
 \`\`\`
 
 2. Setup Python environment
