@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+venv/
+.env
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Android
+*.iml
+.gradle/
+local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+
+# Model files
+*.h5
+*.tflite
+*.pb
+*.onnx
+models/original/*
+models/compressed/*
+!models/original/.gitkeep
+!models/compressed/.gitkeep
+
+# Results and logs
+results/*
+!results/.gitkeep
+*.log
+*.csv
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/extensions.json
