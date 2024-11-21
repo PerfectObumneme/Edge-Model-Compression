@@ -1,0 +1,41 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Compression Pipeline",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/python/src/main.py",
+            "args": [
+                "--config", "${workspaceFolder}/config.json",
+                "--model", "${workspaceFolder}/models/original/model.h5",
+                "--output", "${workspaceFolder}/models/compressed/model.tflite"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}/python"
+        },
+        {
+            "type": "node",                  // Node.js debugger type
+            "request": "launch",            // Launch the application
+            "name": "Launch Android App",   // Configuration name
+            "program": "${workspaceFolder}/index.js", // Entry file (adjust as needed)
+            "cwd": "${workspaceFolder}",    // Current working directory
+            "env": {                        // Environment variables
+                "ANDROID_HOME": "${env:ANDROID_HOME}"
+            },
+            "envFile": "${workspaceFolder}/.env", // Optional: load .env file for more variables
+            "console": "integratedTerminal",     // Display output in the integrated terminal
+            "outFiles": ["${workspaceFolder}/**/*.js"], // Source maps for debugging
+            "runtimeExecutable": "node"     // Node runtime
+        },
+        {
+            "name": "Python: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}

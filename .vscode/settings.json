@@ -1,0 +1,17 @@
+{
+    "python.defaultInterpreterPath": "${workspaceFolder}/python/venv/bin/python",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.formatting.provider": "black",
+    "editor.formatOnSave": true,
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.pytest_cache": true,
+        "**/venv": true,
+        "**/build": true
+    },
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "kotlin.languageServer.enabled": true,
+    "kotlin.debugAdapter.enabled": true
+}
