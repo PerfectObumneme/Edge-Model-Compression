@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">EEE_598_Project</string>
+    <string name="runBenchmarkButton">Run Model</string>
+    <string name="results">Results will be shown here</string>
+    <string name="viewGraph">View Battery Usage Graph</string>
+    <string name="running_benchmark">Running benchmark for %1$s…</string>
+    <string name="run_benchmark_first">Please run a benchmark first.</string>
+    <string name="no_perm">Permission denied. Cannot run benchmark.</string>
+    <string name="benchmark_results">
+        Model: %1$s
+        Inference Time: %2$.2f s
+        Energy Usage: %3$.2f mAh
+        Accuracy: %4$.2f%%
+    </string>
+    <string name="progress">Progress: 0%</string>
+
+</resources>
