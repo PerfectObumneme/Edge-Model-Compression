@@ -127,7 +127,6 @@ class BenchmarkExecutor(context: Context) {
                 val inferenceResult = modelRunner.runInference(tensorImage)
                 inferenceTimeList.add(inferenceResult.inferenceTimeNanos)
                 cpuUsageList.add(cpuMonitor.getUsage())
-
                 // Increment processed images and update progress
                 processedImages++
                 val progress = (processedImages.toFloat() * 100) / totalImages.toFloat()

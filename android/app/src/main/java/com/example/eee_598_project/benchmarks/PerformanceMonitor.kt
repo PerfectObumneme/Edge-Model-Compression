@@ -1,8 +1,6 @@
 package com.example.eee_598_project.benchmarks
 
 import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.graphics.drawable.GradientDrawable
 import android.os.BatteryManager
 import android.util.Log
@@ -12,6 +10,9 @@ import com.github.mikephil.charting.data.LineDataSet
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileWriter
+import java.io.IOException
 import java.util.concurrent.CopyOnWriteArrayList
 
 class PerformanceMonitor(context: Context) {
@@ -88,17 +89,43 @@ class BatteryTracker(private val context: Context) {
     private var isTracking = false
     private var trackingThread: Thread? = null
     private var onBatteryUpdateCallback: ((Long, Int) -> Unit)? = null
+    private val csvFileName = "readings.csv"
+    private val cpuMonitor = CpuMonitor()
 
     fun startTracking(onBatteryUpdate: (Long, Int) -> Unit) {
         isTracking = true
+        val startTimestamp = System.currentTimeMillis()
+        val csvFile = File(context.getExternalFilesDir(null), csvFileName)
+
+        // Write headers to CSV file if not exists
+        if (!csvFile.exists()) {
+            try {
+                csvFile.createNewFile()
+                FileWriter(csvFile, true).use { writer ->
+                    writer.append("Timestamp,mAh,CPU Usage\n")
+                }
+            } catch (e: IOException) {
+                Log.e("BatteryTracker", "Error creating CSV file", e)
+            }
+        }
+
         onBatteryUpdateCallback = onBatteryUpdate
 
         trackingThread = Thread {
             while (isTracking) {
-                val batteryStatus = context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
-                val voltage = batteryStatus?.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1) ?: -1
+                val batteryManager = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
+                val ampH = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER)/1000
 
-                onBatteryUpdateCallback?.invoke(System.currentTimeMillis(), voltage)
+                val timestamp = System.currentTimeMillis()-startTimestamp
+                val cpuUsage = cpuMonitor.getUsage()
+                try {
+                    FileWriter(csvFile, true).use { writer ->
+                        writer.append("$timestamp,$ampH,$cpuUsage\n")
+                    }
+                } catch (e: IOException) {
+                    Log.e("BatteryTracker", "Error writing to CSV file", e)
+                }
+                onBatteryUpdateCallback?.invoke(System.currentTimeMillis(), ampH)
 
                 try {
                     Thread.sleep(1000)

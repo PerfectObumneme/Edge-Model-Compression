@@ -73,7 +73,7 @@ class MainActivity : ComponentActivity() {
             description.isEnabled = false
             axisLeft.apply {
                 axisMinimum = 0f
-                axisMaximum = 5000f  // Adjust based on expected voltage range
+                axisMaximum = 5000f
                 granularity = 500f
             }
             axisRight.isEnabled = false
